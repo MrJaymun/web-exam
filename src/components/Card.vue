@@ -1,8 +1,10 @@
 <template>
-  <div class="card"  :class="[(this.categoryId === '1') ? 'lowest' : ((this.categoryId === '2') ? 'medium' : 'highest')]">
-    <button class="card__button button-colors" @click="this.delete">
+  <div class="card"  :class="[(this.categoryId === '1') ? 'lowest lowest-colors' : ((this.categoryId === '2') ? 'medium medium-colors' : 'highest highest-colors')]">
+
+      <button aria-label="Удалить эту задачу" class="card__button button-colors" @click="this.delete">
       Удалить
     </button>
+
     <div class="text">
      {{this.description}}
     </div>
@@ -41,24 +43,31 @@ export default {
   flex-direction: column-reverse;
 }
 .lowest{
-  background-color: palevioletred;
   width: 200px;
   height: 200px;
-  font-size: 18px;
+  font-size: 1em;
 }
 .medium{
-  background-color: lightyellow;
   width: 400px;
   height: 200px;
-  font-size: 18px;
+  font-size: 1em;
 }
 .highest{
-  background-color: lightgreen;
+
   width: 600px;
   height: 200px;
-  font-size: 18px;
+  font-size: 1.5em;
 }
 
+.highest-colors{
+  background-color: lightgreen;
+}
+.medium-colors{
+  background-color: lightyellow;
+}
+.lowest-colors{
+  background-color: palevioletred;
+}
 .text{
   text-align: center;
   vertical-align: center;
@@ -76,18 +85,18 @@ export default {
   
     width: 130px;
     height: 130px;
-    font-size: 12px;
+    font-size: 0.75em;
   }
   .medium{
    
     width: 195px;
     height: 130px;
-    font-size: 12px;
+    font-size: 0.75em;
   }
   .highest{
     width: 260px;
     height: 130px;
-    font-size: 12px;
+    font-size: 1em;
   }
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="app">
     <header class="header">
       <div class="header__element">
         <img src="../public/img/logo.png" srcset="../public/img/logo.png 1x" alt="Логотип">
@@ -7,39 +7,43 @@
       <div class="header__element">
         <p>Ermolin</p>
       </div>
-      <div class="header__element">
-        <button @click.prevent="" class="header__change-button button-colors">Сменить тему</button>
+      <div class="header__element" aria-label="Сменить тему" >
+        <button @click.prevent="darkThemeSwitch" class="header__change-button button-colors">Сменить тему</button>
       </div>
     </header>
 
     <section class="main-part">
 
       <div class="main-part__add">
-        <button class="main-part__add-button button-colors" @click="showModal = true">
+
+        <button aria-label="Добавить новую задачу" class="main-part__add-button button-colors" @click="showModal = true">
         ДОБАВИТЬ
         </button>
-        <div v-show="showModal">
+
+          <div v-show="showModal">
           <div class="add__modal-background">
           </div>
           <div class="add__modal">
 
             <form class="add__form" @submit.prevent="">
+
               <p>Выберите приоритет задачи</p>
-              <select class="add__select" size="1" v-model="newResultPriority">
+              <select aria-label="Выбрать приоритет"  class="add__select" size="1" v-model="newResultPriority">
                 <option value="1">Низший</option>
                 <option value="2">Средний</option>
                 <option value="3">Высший</option>
 
               </select>
 
+
               <p>Введите описание задачи</p>
 
-              <textarea v-model="desc" class="add_desc" maxlength="70"></textarea>
+              <textarea v-model="desc" aria-label="Введите описание задачи"  class="add_desc" maxlength="70"></textarea>
 
-              <br>
-              <input  type="submit" @click.prevent="send()" value="Отправить" class="form_button button-colors"  v-bind:class="{ shakeit: isShaked }" >
+                <br>
+              <input  aria-label="Сохранить задачу"  type="submit" @click.prevent="send()" value="Добавить" class="form_button button-colors"  v-bind:class="{ shakeit: isShaked }" >
 
-              <button @click="close()" class="form_button button-colors">
+              <button @click="close()" aria-label="Отменить изменения"  class="form_button button-colors">
                 Отменить изменения
               </button>
 
@@ -47,7 +51,7 @@
           </div>
         </div>
       </div>
-      <p>{{this.getItems.length}}</p>
+
       <div class="cards">
         <Card v-for="item in getItems"
               :key="item.id"
@@ -112,6 +116,29 @@ export default {
       this.showModal = false;
       this.desc = "";
       this.isShaked = false;
+    },
+
+    _addDarkTheme() {
+      let darkThemeLinkEl = document.createElement("link");
+      darkThemeLinkEl.setAttribute("rel", "stylesheet");
+      darkThemeLinkEl.setAttribute("href", "/css/darktheme.css");
+      darkThemeLinkEl.setAttribute("id", "dark-theme-style");
+
+      let docHead = document.querySelector("head");
+      docHead.append(darkThemeLinkEl);
+    },
+    _removeDarkTheme() {
+      let darkThemeLinkEl = document.querySelector("#dark-theme-style");
+      let parentNode = darkThemeLinkEl.parentNode;
+      parentNode.removeChild(darkThemeLinkEl);
+    },
+    darkThemeSwitch() {
+      let darkThemeLinkEl = document.querySelector("#dark-theme-style");
+      if (!darkThemeLinkEl) {
+        this._addDarkTheme()
+      } else {
+        this._removeDarkTheme()
+      }
     }
   }
 }
@@ -124,12 +151,12 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 30px;
+  font-size: 2em;
   padding-bottom: 50px;
   border-bottom: 1px solid black;
 }
 .header__change-button {
-  font-size: 30px;
+  font-size: 1em;
   width: 300px;
   height: 50px;
   border-radius: 50px;
@@ -143,7 +170,7 @@ export default {
 .footer__block{
   border-top: 1px solid black;
   display: flex;
-  font-size: 30px;
+  font-size: 2em;
   justify-content: space-between;
   margin-left: 5%;
   margin-right: 5%;
@@ -155,7 +182,7 @@ export default {
 
 .main-part__add-button{
   width: 1000px;
-  font-size: 30px;
+  font-size: 2em;
   height: 100px;
   margin: 30px;
   border-radius: 100px;
@@ -200,13 +227,13 @@ export default {
   width: 800px;
   padding-top: 10px;
   margin: 0 auto;
-  font-size: 40px;
+  font-size: 2em;
 
 }
 
 .add_desc{
   width: 80%;
-  font-size: 20px;
+  font-size: 1em;
   height: 200px;
   resize: none;
 }
@@ -214,13 +241,13 @@ export default {
 .add__select{
   width: 80%;
   height: 50px;
-  font-size: 30px;
+  font-size: 1.5em;
 }
 
 .form_button{
   width: 80%;
   height: 50px;
-  font-size: 30px;
+  font-size: 1em;
   margin-bottom: 20px;
   margin-top: 20px;
   border-radius: 20px;
@@ -236,7 +263,10 @@ export default {
   display: flex;
   flex-wrap: wrap;
 }
-
+.app{
+  margin: 0;
+  padding: 0;
+}
 @keyframes shake {
   0% { transform: translate(1px, 1px) rotate(0deg); }
   10% { transform: translate(-1px, -2px) rotate(-1deg); }
@@ -250,7 +280,12 @@ export default {
   90% { transform: translate(1px, 2px) rotate(0deg); }
   100% { transform: translate(1px, -2px) rotate(-1deg); }
 }
-
+.main-part{
+ min-height: 85vh;
+}
+.header, .footer{
+  max-height: 5vh;
+}
 
 @media (max-width: 1200px) {
   .footer__block{
@@ -267,7 +302,7 @@ export default {
 @media (max-width: 1000px) {
   .add__form{
     width: 500px;
-    font-size: 20px;
+    font-size: 1.5em;
   }
 
   .form_button{
@@ -281,9 +316,10 @@ export default {
     width:250px;
     margin-left: 0;
     margin-right: 0;
-    font-size: 24px;
+    font-size: 1em;
   }
   .header{
+    max-height: none;
     display: block;
     text-align: center;
   }

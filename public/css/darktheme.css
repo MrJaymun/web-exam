@@ -1,0 +1,29 @@
+.button-colors{
+    color: white;
+    border: 1px solid white;
+    background-color: darkblue;
+}
+
+.button-colors:hover{
+    color: darkblue;
+    border: 1px solid darkblue;
+    background-color: white;
+}
+body{
+    background-color: black;
+}
+
+.lowest-colors{
+    color: white;
+    background-color: darkred;
+}
+
+.medium-colors{
+    color: white;
+    background-color: saddlebrown;
+}
+
+.highest-colors{
+    color: white;
+    background-color: darkgreen;
+}

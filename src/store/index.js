@@ -21,9 +21,9 @@ export default new Vuex.Store({
         },
         deleteItem(state, payload){
 
-            var a = this.state.items.find(x => x.id === payload.id)
 
-            this.state.items.splice(a.id, 1);
+
+            this.state.items = this.state.items.filter(x => x.id !== payload.id);
         }
     },
     getters:{
