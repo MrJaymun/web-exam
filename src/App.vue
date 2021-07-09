@@ -1,7 +1,15 @@
 <template>
   <div>
     <header class="header">
-
+      <div class="header__element">
+        <img src="../public/img/logo.png" srcset="../public/img/logo.png 1x" alt="Логотип">
+      </div>
+      <div class="header__element">
+        <p>Ermolin</p>
+      </div>
+      <div class="header__element">
+        <button @click.prevent="" class="header__change-button button-colors">Сменить тему</button>
+      </div>
     </header>
 
     <section class="main-part">
@@ -39,6 +47,7 @@
           </div>
         </div>
       </div>
+      <p>{{this.getItems.length}}</p>
       <Card>
 
       </Card>
@@ -55,10 +64,14 @@
 
 <script>
 import Card from './components/Card.vue'
+import {mapGetters, mapMutations} from 'vuex'
 
 export default {
   components: {
     Card
+  },
+  computed:{
+    ...mapGetters(['getItems']),
   },
   data(){
     return {
@@ -68,12 +81,18 @@ export default {
       isShaked: false
     }
   },
+
   methods: {
+    ...mapMutations(["addItem"]),
     send(){
       if(this.newResultPriority === 0 || this.desc === ""){
         this.isShaked = true;
       }
       else{
+        this.addItem({
+          desc : this.desc,
+         category: this.category
+        });
         this.newResultPriority = 0;
         this.showModal = false;
         this.desc = "";
@@ -92,6 +111,28 @@ export default {
 </script>
 
 <style>
+.header{
+  margin-left: 5%;
+  margin-right: 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 30px;
+  padding-bottom: 50px;
+  border-bottom: 1px solid black;
+}
+.header__change-button {
+  font-size: 30px;
+  width: 300px;
+  height: 50px;
+  border-radius: 50px;
+
+}
+.header__element{
+  width: 33%;
+  text-align: center;
+}
+
 .footer__block{
   border-top: 1px solid black;
   display: flex;
@@ -198,6 +239,7 @@ export default {
   100% { transform: translate(1px, -2px) rotate(-1deg); }
 }
 
+
 @media (max-width: 1200px) {
   .footer__block{
     display: block;
@@ -228,6 +270,16 @@ export default {
     margin-left: 0;
     margin-right: 0;
     font-size: 24px;
+  }
+  .header{
+    display: block;
+    text-align: center;
+  }
+  .header__element{
+    width: 100%;
+  }
+  .header__change-button {
+    width: 250px;
   }
 }
 
