@@ -18,11 +18,17 @@ export default new Vuex.Store({
                 categoryId: payload.category
             })
             state.length += 1;
+        },
+        deleteItem(state, payload){
+
+            var a = this.state.items.find(x => x.id === payload.id)
+
+            this.state.items.splice(a.id, 1);
         }
     },
     getters:{
         getItems(state){
-            return  state.items
+            return  state.items.sort((a, b) => b.id - a.id)
         },
     }
 

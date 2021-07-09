@@ -34,7 +34,7 @@
 
               <p>Введите описание задачи</p>
 
-              <textarea v-model="desc" class="add_desc"></textarea>
+              <textarea v-model="desc" class="add_desc" maxlength="70"></textarea>
 
               <br>
               <input  type="submit" @click.prevent="send()" value="Отправить" class="form_button button-colors"  v-bind:class="{ shakeit: isShaked }" >
@@ -48,9 +48,16 @@
         </div>
       </div>
       <p>{{this.getItems.length}}</p>
-      <Card>
+      <div class="cards">
+        <Card v-for="item in getItems"
+              :key="item.id"
+              :id="item.id"
+              :description="item.description"
+              :categoryId="item.categoryId"
+        >
+        </Card>
+      </div>
 
-      </Card>
     </section>
     <footer class="footer">
       <div class="footer__block">
@@ -91,7 +98,7 @@ export default {
       else{
         this.addItem({
           desc : this.desc,
-         category: this.category
+         category: this.newResultPriority
         });
         this.newResultPriority = 0;
         this.showModal = false;
@@ -223,6 +230,11 @@ export default {
   animation: shake 2s;
   animation-iteration-count: infinite;
 
+}
+
+.cards{
+  display: flex;
+  flex-wrap: wrap;
 }
 
 @keyframes shake {
