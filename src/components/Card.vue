@@ -61,12 +61,15 @@ export default {
 
 .highest-colors{
   background-color: lightgreen;
+  color: black;
 }
 .medium-colors{
   background-color: lightyellow;
+  color: black;
 }
 .lowest-colors{
   background-color: palevioletred;
+  color: black;
 }
 .text{
   text-align: center;

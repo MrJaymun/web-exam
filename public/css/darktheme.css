@@ -9,21 +9,22 @@
     border: 1px solid darkblue;
     background-color: white;
 }
+
 body{
-    background-color: black;
+    background-color: #222222;
+    color: white;
 }
 
-.lowest-colors{
-    color: white;
-    background-color: darkred;
+.header__line{
+    border-bottom: 1px solid white;
 }
 
-.medium-colors{
-    color: white;
-    background-color: saddlebrown;
+.footer__line{
+    border-top: 1px solid white;
 }
 
-.highest-colors{
+.add__form-colors{
+    background-color: #222222;
     color: white;
-    background-color: darkgreen;
+    border: 3px white solid;
 }

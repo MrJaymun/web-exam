@@ -1,6 +1,6 @@
 <template>
   <div class="app">
-    <header class="header">
+    <header class="header header__line">
       <div class="header__element">
         <img src="../public/img/logo.png" srcset="../public/img/logo.png 1x" alt="Логотип">
       </div>
@@ -25,7 +25,7 @@
           </div>
           <div class="add__modal">
 
-            <form class="add__form" @submit.prevent="">
+            <form class="add__form add__form-colors" @submit.prevent="">
 
               <p>Выберите приоритет задачи</p>
               <select aria-label="Выбрать приоритет"  class="add__select" size="1" v-model="newResultPriority">
@@ -63,7 +63,7 @@
       </div>
 
     </section>
-    <footer class="footer">
+    <footer class="footer footer__line">
       <div class="footer__block">
         <p>Ермолин Алексей Александрович</p>
         <p>Группа 191-361</p>
@@ -153,8 +153,13 @@ export default {
   align-items: center;
   font-size: 2em;
   padding-bottom: 50px;
-  border-bottom: 1px solid black;
+
 }
+
+.footer__line{
+  border-top: 1px solid black;
+}
+
 .header__change-button {
   font-size: 1em;
   width: 300px;
@@ -168,7 +173,7 @@ export default {
 }
 
 .footer__block{
-  border-top: 1px solid black;
+
   display: flex;
   font-size: 2em;
   justify-content: space-between;
@@ -178,8 +183,14 @@ export default {
 
 .main-part__add{
   text-align: center;
+
 }
 
+.add__form-colors{
+  background-color: white;
+  color: black;
+  border: 3px darkblue solid;
+}
 .main-part__add-button{
   width: 1000px;
   font-size: 2em;
@@ -222,8 +233,7 @@ export default {
 }
 
 .add__form{
-  background-color: white;
-  border: 3px darkblue solid;
+
   width: 800px;
   padding-top: 10px;
   margin: 0 auto;
@@ -285,6 +295,10 @@ export default {
 }
 .header, .footer{
   max-height: 5vh;
+}
+
+.header__line{
+  border-bottom: 1px solid black;
 }
 
 @media (max-width: 1200px) {
